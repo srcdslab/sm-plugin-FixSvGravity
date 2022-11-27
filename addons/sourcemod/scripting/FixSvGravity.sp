@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "sv_gravity fix",
 	author = "BotoX",
 	description = "Resets sv_gravity at game_end and prevents stupid admins from crashing your server.",
-	version = "1.1",
+	version = "1.1.0",
 	url = ""
 };
 
