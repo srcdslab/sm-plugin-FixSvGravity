@@ -109,11 +109,8 @@ public void OnGameFrame()
 	}
 }
 
-public void RestoreGravity(int client)
-{
-	if (!IsValidEntity(client))
+	if (client < 1 || client > MaxClients || !IsClientInGame(client))
 		return;
-
 	g_bLadder[client] = false;
 	SetEntityGravity(client, g_flClientGravity[client]);
 }
