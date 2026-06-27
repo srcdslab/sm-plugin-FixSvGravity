@@ -82,7 +82,7 @@ public void OnGameFrame()
 		// Now that they're off, restore it
 		if (g_bLadder[client])
 		{
-			RequestFrame(RestoreGravity, client);
+			RequestFrame(RestoreGravity, GetClientUserId(client));
 			continue;
 		}
 
@@ -109,9 +109,11 @@ public void OnGameFrame()
 	}
 }
 
-public void RestoreGravity(int client)
+public void RestoreGravity(int userid)
 {
-	if (client < 1 || client > MaxClients || !IsClientInGame(client))
+	int client = GetClientOfUserId(userid);
+
+	if (!client)
 		return;
 
 	g_bLadder[client] = false;
