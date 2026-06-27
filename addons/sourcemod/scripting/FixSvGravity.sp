@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "FixSvGravity",
 	author = "Botox, xen",
 	description = "Fixes gravity prediction, server crashes and resets gravity on map end",
-	version = "2.0.0",
+	version = "2.0.1",
 	url = ""
 };
 
@@ -111,6 +111,9 @@ public void OnGameFrame()
 
 public void RestoreGravity(int client)
 {
+	if (!IsValidEntity(client))
+		return;
+
 	g_bLadder[client] = false;
 	SetEntityGravity(client, g_flClientGravity[client]);
 }
