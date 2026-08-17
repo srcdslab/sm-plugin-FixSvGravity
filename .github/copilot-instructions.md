@@ -10,34 +10,33 @@ This repository contains a single SourcePawn plugin for SourceMod that fixes gra
 
 ## Technical Environment
 - **Language**: SourcePawn
-- **Platform**: SourceMod 1.11.0+ (current target: 1.11.0-git6917)
-- **Build Tool**: SourceKnight 0.1
-- **Compiler**: SourcePawn compiler via SourceKnight
+- **Platform**: SourceMod 1.12.x
+- **Build Tool**: Native GitHub Actions (rumblefrog/setup-sp)
+- **Compiler**: spcomp via rumblefrog/setup-sp
 - **Dependencies**: sourcemod, sdktools
 
 ## Project Structure
 ```
 ├── .github/
-│   ├── workflows/ci.yml          # CI/CD pipeline using SourceKnight
+│   ├── workflows/ci.yml          # CI/CD pipeline using native GitHub Actions
 │   └── copilot-instructions.md   # This file
 ├── addons/sourcemod/scripting/
 │   └── FixSvGravity.sp           # Main plugin source code
-├── sourceknight.yaml             # Build configuration
 └── .gitignore                    # Excludes build artifacts (.smx files)
 ```
 
 ## Build System
-This project uses **SourceKnight** as the build tool:
+This project uses a native **GitHub Actions** workflow (no external build tool):
 
-- **Configuration**: `sourceknight.yaml` 
+- **Configuration**: `.github/workflows/ci.yml`
 - **Build Target**: `FixSvGravity` (compiles to `FixSvGravity.smx`)
-- **Output Directory**: `/addons/sourcemod/plugins`
-- **CI/CD**: GitHub Actions workflow builds on Ubuntu 24.04
+- **Output Directory**: `addons/sourcemod/plugins`
+- **CI/CD**: GitHub Actions workflow builds on ubuntu-latest using rumblefrog/setup-sp (SourceMod 1.12.x)
 
 ### Build Commands
-The project is built via SourceKnight through GitHub Actions. Manual building requires:
-1. SourceKnight installation: `pip install sourceknight`
-2. Build command: `sourceknight build`
+The project is built via `spcomp` directly through GitHub Actions. Manual building requires:
+1. A SourcePawn compiler (`spcomp`) matching SourceMod 1.12.x
+2. Build command: `spcomp -i include -o addons/sourcemod/plugins/FixSvGravity.smx addons/sourcemod/scripting/FixSvGravity.sp`
 
 ## Code Style & Standards
 This project follows SourcePawn best practices:
@@ -108,8 +107,7 @@ The FixSvGravity plugin addresses several critical issues:
 
 ## File Modification Guidelines
 - **FixSvGravity.sp**: Main plugin logic - be extremely careful with changes
-- **sourceknight.yaml**: Build configuration - update SourceMod version if needed
-- **.github/workflows/ci.yml**: CI/CD pipeline - maintains automated building
+- **.github/workflows/ci.yml**: CI/CD pipeline - maintains automated building; update the SourceMod version passed to rumblefrog/setup-sp if needed
 
 ## Debugging and Troubleshooting
 - Use SourceMod's error logging for debugging
@@ -119,7 +117,7 @@ The FixSvGravity plugin addresses several critical issues:
 - Verify gravity reset behavior on map changes
 
 ## Dependencies and Compatibility
-- **SourceMod**: 1.11.0+ (tested with 1.11.0-git6917)
+- **SourceMod**: 1.12.x (compiled via rumblefrog/setup-sp)
 - **Game Support**: All Source engine games supported by SourceMod
 - **Plugin Conflicts**: May conflict with other gravity-modifying plugins
 - **ConVar Dependencies**: Requires `sv_gravity` ConVar access
