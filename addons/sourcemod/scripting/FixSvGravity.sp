@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "FixSvGravity",
 	author = "Botox, xen",
 	description = "Fixes server crashes and resets gravity on map end",
-	version = "3.0.0",
+	version = "3.0.1",
 	url = ""
 };
 
@@ -53,7 +53,7 @@ public void ResetGravityAll()
 	char szGravity[8];
 	g_ConVar_SvGravity.GetString(szGravity, sizeof(szGravity));
 
-	for (int client = 1; client < MaxClients; client++)
+	for (int client = 1; client <= MaxClients; client++)
 	{
 		if (IsClientInGame(client) && !IsFakeClient(client))
 			SetEntityGravity(client, 1.0);
