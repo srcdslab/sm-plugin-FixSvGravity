@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "FixSvGravity",
 	author = "Botox, xen",
 	description = "Fixes server crashes and resets gravity on map end",
-	version = "3.0.0",
+	version = "3.0.1",
 	url = ""
 };
 
