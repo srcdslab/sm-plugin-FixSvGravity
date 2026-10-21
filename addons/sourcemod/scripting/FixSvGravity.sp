@@ -10,7 +10,7 @@ public Plugin myinfo =
 	name = "FixSvGravity",
 	author = "Botox, xen",
 	description = "Fixes server crashes and resets gravity on map end",
-	version = "3.0.1",
+	version = "3.0.2",
 	url = ""
 };
 
@@ -43,7 +43,7 @@ public void OnConVarChanged(ConVar convar, const char[] oldValue, const char[] n
 	}
 }
 
-public void OnRoundStart(Handle event, const char[] name, bool dontBroadcast)
+public void OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 {
 	ResetGravityAll();
 }
